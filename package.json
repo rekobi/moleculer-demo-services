@@ -1,0 +1,24 @@
+{
+  "name": "mole-service",
+  "version": "1.0.0",
+  "description": "moleculer-services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rekobi/moleculer-demo-services.git"
+  },
+  "author": "rekko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rekobi/moleculer-demo-services/issues"
+  },
+  "homepage": "https://github.com/rekobi/moleculer-demo-services#readme",
+  "dependencies": {
+    "moleculer": "^0.13.1",
+    "moleculer-repl": "^0.5.1",
+    "nats": "^1.0.1"
+  }
+}
