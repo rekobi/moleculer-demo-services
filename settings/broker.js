@@ -1,5 +1,7 @@
 module.exports = {
     
+    nodeID: "test-node",
+
     logLevel: "fatal",
 
     transporter: "NATS",//设定通信方式为NATS 默认连接到'nats://nats-server:4222'

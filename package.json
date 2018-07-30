@@ -4,6 +4,7 @@
   "description": "moleculer-services",
   "main": "index.js",
   "scripts": {
+    "service": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
