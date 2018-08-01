@@ -1,0 +1,34 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-console": "off",
+        "indent": [
+            "error",
+            2,
+            {
+              "SwitchCase" : 0,
+              "MemberExpression": 0
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "off",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}

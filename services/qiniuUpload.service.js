@@ -1,14 +1,46 @@
+"use strict";
+
 const qiniu = require("qiniu");
 const property = require("../properties/prop.js");
 module.exports = {
-	name:"qiniu",
+    name:"qiniu",
+    
+    version: 1,
 
 	settings: {
 
 	},
+    
 	actions:{
 		
-		upload: async function(){
+		upload: {
+			handler() {
+				return this.uploadFileToQiNiu();
+			}
+		}
+
+
+	},
+	/**
+	 * Events
+	 */
+	events: {
+        "order.create": {
+            group:"rua",
+            handler(payload){
+                console.log(payload);
+            }
+
+        }
+
+	},
+
+	/**
+	 * Methods
+	 */
+	methods: {
+		
+		uploadFileToQiNiu() {
 			let bucket = property.qiniu.bucket;
 			let accessKey = property.qiniu.ACCESS_KEY;
 			let secretKey = property.qiniu.SECRET_KEY;
@@ -31,58 +63,37 @@ module.exports = {
 			putExtra.progressCallback = function(uploadBytes, totalBytes) {
 				console.log("progress:" + uploadBytes + "(" + totalBytes + ")");
 			};
-			await resumeUploader.putFile(uploadToken, key, localFile, putExtra, function(respErr,
+			let gen = new Promise((resolve,reject)=>{
+				resumeUploader.putFile(uploadToken, key, localFile, putExtra, function(respErr,
 					respBody, respInfo) {
 					if (respErr) {
 						throw respErr;
 					}
 					if (respInfo.statusCode == 200) {
 						let downLoadURL = domain+ "/" + respBody.key; 
-						return {
-							result: "Success",
-							res : downLoadURL
-						}
+						resolve(downLoadURL);
 					} else {
-						return {
-							result :"Failed",
-							res : respBody
-						}
+						reject(respBody);
 					}
 				});
-		
-			// return gen.then((value)=>{
-			// 	this.logger.info(value);
-			// 	return {
-			// 		msg: "上传成功",
-			// 		data: {
-			// 			url: value
-			// 		}
-			// 	};
-			// }).catch((err)=>{
-			// 	this.logger.info(err);
-			// 	return {
-			// 		msg: "上传失败",
-			// 		err: err
-			// 	};
-			// });
-
+			});
+			return gen.then((value)=>{
+				this.logger.info(value);
+				return {
+					msg: "上传成功",
+					data: {
+						url: value
+					}
+				};
+			}).catch((err)=>{
+				this.logger.info(err);
+				return {
+					msg: "上传失败",
+					err: err
+				};
+			});
+			
 		},
-
-
-	},
-	/**
-	 * Events
-	 */
-	events: {
-
-	},
-
-	/**
-	 * Methods
-	 */
-	methods: {
-		
-
 	},
 
 
