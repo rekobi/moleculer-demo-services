@@ -14,7 +14,6 @@ module.exports={
 
     rua: async function(ctx){
       let mongo = await global.mongoPool.acquire();
-      console.log(mongo);
       await mongo.db().collection("rua").insertOne({rua : ctx.params.num});
       global.mongoPool.release(mongo);
       return Number(ctx.params.num)+1;
