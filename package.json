@@ -21,6 +21,7 @@
     "amqplib": "^0.5.2",
     "eslint": "^5.2.0",
     "generic-pool": "^3.4.2",
+    "joi": "^13.5.2",
     "moleculer": "^0.13.1",
     "moleculer-repl": "^0.5.1",
     "mongodb": "^3.1.1",
@@ -31,6 +32,5 @@
   },
   "jest": {
     "testEnvironment": "node"
-    
   }
 }

@@ -12,11 +12,13 @@ module.exports={
 
   actions:{
 
-    rua: async function(ctx){
-      let mongo = await global.mongoPool.acquire();
-      await mongo.db().collection("rua").insertOne({rua : ctx.params.num});
-      global.mongoPool.release(mongo);
-      return Number(ctx.params.num)+1;
+    rua: async function(){
+      // let mongo = await global.mongoPool.acquire();
+      // await mongo.db().collection("rua").insertOne({rua : ctx.params.num});
+      // global.mongoPool.release(mongo);
+      return {
+        "name":"rua"
+      };
     },
 
 

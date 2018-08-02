@@ -1,4 +1,9 @@
+
+
 module.exports = {
+  
+  
+  //负载均衡设置
   registry:{ 
     strategy:"CpuUsage",
     strategyOptions:{ 
