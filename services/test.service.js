@@ -10,7 +10,8 @@ module.exports={
 
   params: {
 
-    num: "number"
+    num: "number",
+    filepath: "string"
   },
 
   actions:{
@@ -23,10 +24,10 @@ module.exports={
         "name":"rua"
       };
     },
-    son: async function () {
+    son: async function (ctx) {
 
       // console.log(dir);
-      var workbook = XLSX.parse("test.xlsx");
+      var workbook = XLSX.parse("/home/henbf/projects/moleculer-demo/"+ ctx.params.filepath);
 
       var result = [];
       workbook.forEach(wb => {
