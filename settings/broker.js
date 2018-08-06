@@ -11,7 +11,7 @@ module.exports = {
       lowCpuUsage:10
     }
   },
-  nodeID: "test-node",
+  // nodeID: "test-node",
 
   logLevel: "fatal",
 
