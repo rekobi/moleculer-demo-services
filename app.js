@@ -5,5 +5,5 @@ const connPool = require("./utils/connectionPool.js");
 const broker = new ServiceBroker(brokerSetting);
 connPool();
 broker.loadServices();
-broker.repl();
+// broker.repl();
 broker.start();

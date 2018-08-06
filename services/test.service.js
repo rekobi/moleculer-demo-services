@@ -1,10 +1,13 @@
 "use strict";
+const mongoMix = require("../mixins/mongoMixin.js");
 
 
 const XLSX = require('node-xlsx');
 module.exports={
 
-  name:"test",
+  name:"ZouwbTest",
+
+  mixins: [mongoMix],
 
   version: 3,
 
@@ -16,16 +19,21 @@ module.exports={
 
   actions:{
 
-    rua: async function(){
+    mT: async function(ctx){
+      let mongo = ctx.params.mongo;
+      let result = await mongo.db().collection("rua").findOne({"testid":1});
+      return result.testname;
+
+    },
+
+    rua: async function(ctx){
       // let mongo = await global.mongoPool.acquire();
-      // await mongo.db().collection("rua").insertOne({rua : ctx.params.num});
+      let mongo = ctx.params.mongo;
+      return await mongo.db().collection("rua").find({"testid":1});
       // global.mongoPool.release(mongo);
-      return {
-        "name":"rua"
-      };
+      
     },
     son: async function (ctx) {
-
       // console.log(dir);
       var workbook = XLSX.parse("/home/henbf/projects/moleculer-demo/"+ ctx.params.filepath);
 
