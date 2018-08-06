@@ -5,9 +5,11 @@ const mongoMix = require("../mixins/mongoMixin.js");
 const XLSX = require('node-xlsx');
 module.exports={
 
+
   name:"ZouwbTest",
 
   mixins: [mongoMix],
+
 
   version: 3,
 

@@ -11,7 +11,6 @@ module.exports = {
       lowCpuUsage:10
     }
   },
-  // nodeID: "zwbTest",
 
   logLevel: "fatal",
 
