@@ -2,10 +2,12 @@
 const _ = require("lodash");
 const xml2js = require('xml2js');
 const fs = require("fs");
+let path = require("path");
 module.exports={
 
   methods:{
     getPicInfo : async function (dir) {
+      let imgDir = path.dirname(dir);
       //let dir = "/home/henbf/projects/moleculer-demo-services/filehenf/xl/drawings";
       let tmp = await new Promise((resolve)=>{
         let parser = new xml2js.Parser();
@@ -51,7 +53,11 @@ module.exports={
             let index = _.findIndex(newUrls,function(o){
               return  o.Id == u.rid;
             });
-            tmp[i]['url'] = newUrls[index]['Target'];
+            let t = newUrls[index]['Target'];
+            let tt = t.split('/');
+            t = imgDir+"/"+tt[1]+"/"+tt[2];
+            tmp[i]['imagePath'] = t;
+            
             finalResult.push(tmp[i]);
           });
                 
