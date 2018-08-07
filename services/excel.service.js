@@ -46,11 +46,24 @@ module.exports={
 
 
       let item = {},
-        returnData = [];
+        endData ={
+          data : null,
+          other: null
+        },
+        returnData = [],
+        others = [];
       for (let i = 0; i < mapsData[0].data.length; i++) {
         let ai = mapsData[0].data[i];
         if(!ai.对内配置){
-          continue;
+          let other = Object.values(ai);
+          if(JSON.stringify(other) != "[]"){
+            other.map((v)=>{
+              if(v.length !=0){
+                others.push(v);
+              }
+            });
+            
+          }
         }else{
           if (!item[ai.材料名称]) {
             let row = Object.assign({},ai);
@@ -62,8 +75,9 @@ module.exports={
               name: ai.材料名称,
               isMust:this.isTrue(ai.是否为必选),
               isSingle: this.isTrue(ai.是否为单选),
-              describe: ai.说明,
-              rows: [row]
+              description: ai.说明,
+              headers: ["对内配置","对外配置","成本/元"],
+              rows: [Object.values(row)],
             });
                 
             item[ai.材料名称] = ai;
@@ -75,7 +89,7 @@ module.exports={
                 delete ai.是否为必选;
                 delete ai.是否为单选;
                 delete ai.说明;
-                temp.rows.push(ai);
+                temp.rows.push(Object.values(ai));
                 break;
               }
             }
@@ -83,7 +97,9 @@ module.exports={
         }
         
       }
-      return JSON.stringify(returnData);
+      endData.data = returnData;
+      endData.other = others;
+      return JSON.stringify(endData);
     }
 
 
